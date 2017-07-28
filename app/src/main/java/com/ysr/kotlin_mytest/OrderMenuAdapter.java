@@ -15,10 +15,10 @@ import java.util.List;
  */
 
 public class OrderMenuAdapter extends RecyclerView.Adapter {
-    private List<Data> list;
+    private List<String> list;
     private Context context;
     private String type;
-    public OrderMenuAdapter(Context context, List<Data> list,String type) {
+    public OrderMenuAdapter(Context context, List<String> list,String type) {
         this.list = list;
         this.type = type;
         this.context = context;
@@ -33,19 +33,19 @@ public class OrderMenuAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final int adjPosition = position;
-        ((MyViewHolder) holder).textView.setText(list.get(position).getType());
+        ((MyViewHolder) holder).textView.setText(list.get(position).toString());
         if (itemClickListener != null) {
             ((MyViewHolder) holder).textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Object tag = v.getTag();
-                    if (tag instanceof Data) {
-                        itemClickListener.onItemTextClick(holder.itemView, adjPosition, (Data) tag,type);
+                    if (tag.equals(tag.toString())) {
+                        itemClickListener.onItemTextClick(holder.itemView, adjPosition, list.get(position).toString(),type);
                     }
 
                 }
             });
-            Data one = list.get(adjPosition);
+            Object one = list.get(adjPosition);
             if (null != one) {
                 ((MyViewHolder) holder).textView.setTag(one);
             }
@@ -80,6 +80,6 @@ public class OrderMenuAdapter extends RecyclerView.Adapter {
      * 点击事件选择回调
      */
     interface onItemClickListener {
-        void onItemTextClick(View view, int position, Data data,String type);
+        void onItemTextClick(View view, int position, String data,String type);
     }
 }

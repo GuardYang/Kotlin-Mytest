@@ -17,9 +17,10 @@ import java.util.List;
 public class OrderMenuAdapter extends RecyclerView.Adapter {
     private List<Data> list;
     private Context context;
-
-    public OrderMenuAdapter(Context context, List<Data> list) {
+    private String type;
+    public OrderMenuAdapter(Context context, List<Data> list,String type) {
         this.list = list;
+        this.type = type;
         this.context = context;
     }
 
@@ -39,7 +40,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     Object tag = v.getTag();
                     if (tag instanceof Data) {
-                        itemClickListener.onItemTextClick(holder.itemView, adjPosition, (Data) tag);
+                        itemClickListener.onItemTextClick(holder.itemView, adjPosition, (Data) tag,type);
                     }
 
                 }
@@ -79,6 +80,6 @@ public class OrderMenuAdapter extends RecyclerView.Adapter {
      * 点击事件选择回调
      */
     interface onItemClickListener {
-        void onItemTextClick(View view, int position, Data data);
+        void onItemTextClick(View view, int position, Data data,String type);
     }
 }

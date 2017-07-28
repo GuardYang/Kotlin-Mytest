@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity implements RclViewDialog.onI
     private TextView subtract;
     private List<Data> list = new ArrayList<>();
     private RclViewDialog dialog;
+    private String type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements RclViewDialog.onI
         list.add(data);
         list.add(data);
         list.add(data);
-        dialog = new RclViewDialog(MainActivity.this, list);
+        type = "11";
+        dialog = new RclViewDialog(MainActivity.this, list,type);
         dialog.setItemClickListener(this);
         subtract = (TextView) findViewById(R.id.subtract);
         subtract.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements RclViewDialog.onI
     }
 
     @Override
-    public void onItemClick(Data data) {
+    public void onItemClick(Data data,String type) {
         Log.e("eeeee", data.getType());
+        Log.e("eeeee", type);
     }
 }

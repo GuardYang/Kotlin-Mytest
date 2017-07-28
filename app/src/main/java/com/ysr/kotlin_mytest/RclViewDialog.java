@@ -22,11 +22,12 @@ public class RclViewDialog extends Dialog implements OrderMenuAdapter.onItemClic
     private RecyclerView mListView;
     private List<Data> datas;
     private OrderMenuAdapter orderMenuAdapter;
-
-    public RclViewDialog(Context context, List<Data> datas) {
+    private String type;
+    public RclViewDialog(Context context, List<Data> datas,String type) {
         super(context);
         mContext = context;
         this.datas = datas;
+        this.type = type;
         initView();
         initListView();
     }
@@ -38,7 +39,7 @@ public class RclViewDialog extends Dialog implements OrderMenuAdapter.onItemClic
     }
 
     private void initListView() {
-        orderMenuAdapter = new OrderMenuAdapter(mContext, datas);
+        orderMenuAdapter = new OrderMenuAdapter(mContext, datas,type);
         orderMenuAdapter.setItemClickListener(this);
         mListView.setLayoutManager(new LinearLayoutManager(mContext));
         mListView.setAdapter(orderMenuAdapter);
@@ -64,8 +65,8 @@ public class RclViewDialog extends Dialog implements OrderMenuAdapter.onItemClic
 
 
     @Override
-    public void onItemTextClick(View view, int position, Data data) {
-        itemClickListener.onItemClick(data);
+    public void onItemTextClick(View view, int position, Data data,String type) {
+        itemClickListener.onItemClick(data,type);
         dismiss();
         cancel();
 
@@ -78,6 +79,6 @@ public class RclViewDialog extends Dialog implements OrderMenuAdapter.onItemClic
     }
 
     interface onItemClick {
-        void onItemClick(Data data);
+        void onItemClick(Data data,String type);
     }
 }
